@@ -1,10 +1,19 @@
 import { AppScreen } from "@stackflow/plugin-basic-ui";
 import { useFlow, useLoaderData } from "@stackflow/react/future";
+import type { Route } from "./+types/hello";
 
-export function loader() {
+export function loader({ request, context, params }: Route.LoaderArgs) {
+  console.log(context);
+
   return {
     message: "hello",
   };
+}
+
+declare module "@stackflow/config" {
+  interface Register {
+    HelloActivity: {};
+  }
 }
 
 export default function HelloActivity() {
@@ -19,7 +28,7 @@ export default function HelloActivity() {
       <button
         type="button"
         onClick={() => {
-          push("WorldActivity", {});
+          push("WorldActivity", { thisway: "1234" });
         }}
       >
         to world

@@ -1,42 +1,13 @@
-import "./app.css";
 import "@stackflow/plugin-basic-ui/index.css";
+import "./app.css";
 
 import { basicUIPlugin } from "@stackflow/plugin-basic-ui";
-import { historySyncPlugin } from "@stackflow/plugin-history-sync";
 import { basicRendererPlugin } from "@stackflow/plugin-renderer-basic";
-import { stackflow } from "@stackflow/react/future";
-import { useContext, useMemo } from "react";
-import {
-  Links,
-  Meta,
-  Scripts,
-  UNSAFE_DataRouterContext,
-  useLocation,
-} from "react-router";
-import { routesToComponents } from "./lib/routesToComponents";
-import { routesToConfig } from "./lib/routesToConfig";
+import { Links, Meta, Scripts } from "react-router";
+import type { Route } from "./+types/root";
+import Stack from "./lib/Stack";
+import { assignStackflowContext } from "./lib/assignStackflowContext";
 import routes from "./routes";
-
-const config = routesToConfig({
-  routes,
-  transitionDuration: 270,
-});
-const components = routesToComponents({ routes });
-
-const { Stack } = stackflow({
-  config,
-  components,
-  plugins: [
-    basicRendererPlugin(),
-    basicUIPlugin({
-      theme: "android",
-    }),
-    historySyncPlugin({
-      config,
-      fallbackActivity: () => "",
-    }),
-  ],
-});
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -55,24 +26,21 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+export function loader(args: Route.LoaderArgs) {
+  assignStackflowContext(routes, args);
+}
+
 export default function App() {
-  const location = useLocation();
-  const dataRouterContext = useContext(UNSAFE_DataRouterContext);
-
-  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-  const initialLoaderData = useMemo(() => {
-    const state = dataRouterContext
-      ? dataRouterContext.router.state.loaderData
-      : {};
-
-    const routeId = Object.keys(state).filter((k) => k !== "root")[0];
-    return (routeId && state[routeId]) ?? null;
-  }, []);
-
   return (
     <Stack
-      initialContext={{ req: { path: location.pathname + location.search } }}
-      initialLoaderData={initialLoaderData}
+      routes={routes}
+      fallbackActivity={() => "HelloActivity"}
+      plugins={() => [
+        basicRendererPlugin(),
+        basicUIPlugin({
+          theme: "android",
+        }),
+      ]}
     />
   );
 }
