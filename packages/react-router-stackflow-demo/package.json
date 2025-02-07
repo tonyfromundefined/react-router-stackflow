@@ -11,6 +11,12 @@
   "dependencies": {
     "@react-router/node": "^7.1.5",
     "@react-router/serve": "^7.1.5",
+    "@stackflow/config": "^1.2.1",
+    "@stackflow/core": "^1.1.1",
+    "@stackflow/plugin-basic-ui": "^1.11.1",
+    "@stackflow/plugin-history-sync": "^1.7.1",
+    "@stackflow/plugin-renderer-basic": "^1.1.13",
+    "@stackflow/react": "^1.4.2",
     "isbot": "^5.1.17",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
