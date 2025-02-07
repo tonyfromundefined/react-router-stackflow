@@ -14,7 +14,9 @@ export function activity({
   activityName: string;
   activityComponent: ActivityComponentType<RegisteredActivityName>;
 }): StackflowRouteConfigEntry {
-  const routeConfigEntry = route(path, file);
+  const routeConfigEntry = route(path, file, {
+    id: activityName,
+  });
 
   return {
     ...routeConfigEntry,

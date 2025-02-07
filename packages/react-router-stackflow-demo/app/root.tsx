@@ -1,14 +1,14 @@
 import "./app.css";
+import "@stackflow/plugin-basic-ui/index.css";
 
 import { basicUIPlugin } from "@stackflow/plugin-basic-ui";
 import { historySyncPlugin } from "@stackflow/plugin-history-sync";
 import { basicRendererPlugin } from "@stackflow/plugin-renderer-basic";
 import { stackflow } from "@stackflow/react/future";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import {
   Links,
   Meta,
-  Outlet,
   Scripts,
   UNSAFE_DataRouterContext,
   useLocation,
@@ -58,9 +58,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   const location = useLocation();
   const dataRouterContext = useContext(UNSAFE_DataRouterContext);
-  const initialLoaderData = dataRouterContext
-    ? dataRouterContext.router.state.loaderData
-    : null;
+
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  const initialLoaderData = useMemo(() => {
+    const state = dataRouterContext
+      ? dataRouterContext.router.state.loaderData
+      : {};
+
+    const routeId = Object.keys(state).filter((k) => k !== "root")[0];
+    return (routeId && state[routeId]) ?? null;
+  }, []);
 
   return (
     <Stack

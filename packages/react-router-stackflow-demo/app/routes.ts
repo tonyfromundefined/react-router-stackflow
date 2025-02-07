@@ -9,4 +9,10 @@ export default [
     activityName: "HelloActivity",
     activityComponent: React.lazy(() => import("./activities/hello")),
   }),
+  activity({
+    path: "/world",
+    file: "./activities/world.tsx",
+    activityName: "WorldActivity",
+    activityComponent: React.lazy(() => import("./activities/world")),
+  }),
 ] satisfies RouteConfig;
