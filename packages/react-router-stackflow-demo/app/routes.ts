@@ -1,6 +1,6 @@
 import type { RouteConfig } from "@react-router/dev/routes";
 import React from "react";
-import { activity } from "./lib/activity";
+import { activity } from "react-router-stackflow";
 
 export default [
   activity({

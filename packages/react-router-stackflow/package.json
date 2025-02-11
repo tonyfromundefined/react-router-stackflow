@@ -1,4 +1,41 @@
 {
   "name": "react-router-stackflow",
-  "version": "0.0.0"
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "nanobundle build"
+  },
+  "devDependencies": {
+    "@react-router/dev": "^7.1.5",
+    "@stackflow/config": "^1.2.1",
+    "@stackflow/core": "^1.1.1",
+    "@stackflow/plugin-basic-ui": "^1.11.1",
+    "@stackflow/plugin-history-sync": "^1.7.1",
+    "@stackflow/plugin-renderer-basic": "^1.1.13",
+    "@stackflow/react": "^1.4.2",
+    "@types/react": "^19.0.1",
+    "nanobundle": "^2.1.0",
+    "react-router": "^7.1.5"
+  },
+  "peerDependencies": {
+    "@react-router/dev": "^7",
+    "@stackflow/config": "^1",
+    "@stackflow/core": "^1",
+    "@stackflow/plugin-basic-ui": "^1",
+    "@stackflow/plugin-history-sync": "^1",
+    "@stackflow/plugin-renderer-basic": "^1",
+    "@stackflow/react": "^1",
+    "@types/react": ">=18",
+    "react": ">=18",
+    "react-router": "^7"
+  }
 }

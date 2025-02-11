@@ -1,12 +1,11 @@
 import "@stackflow/plugin-basic-ui/index.css";
-import "./app.css";
 
 import { basicUIPlugin } from "@stackflow/plugin-basic-ui";
+import { historySyncPlugin } from "@stackflow/plugin-history-sync";
 import { basicRendererPlugin } from "@stackflow/plugin-renderer-basic";
 import { Links, Meta, Scripts } from "react-router";
+import { Stack, assignStackflowContext } from "react-router-stackflow";
 import type { Route } from "./+types/root";
-import Stack from "./lib/Stack";
-import { assignStackflowContext } from "./lib/assignStackflowContext";
 import routes from "./routes";
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -34,11 +33,14 @@ export default function App() {
   return (
     <Stack
       routes={routes}
-      fallbackActivity={() => "HelloActivity"}
-      plugins={() => [
+      plugins={({ config }) => [
         basicRendererPlugin(),
         basicUIPlugin({
           theme: "android",
+        }),
+        historySyncPlugin({
+          config,
+          fallbackActivity: () => "HelloActivity",
         }),
       ]}
     />

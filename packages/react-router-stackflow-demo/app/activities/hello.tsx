@@ -3,8 +3,6 @@ import { useFlow, useLoaderData } from "@stackflow/react/future";
 import type { Route } from "./+types/hello";
 
 export function loader({ request, context, params }: Route.LoaderArgs) {
-  console.log(context);
-
   return {
     message: "hello",
   };
@@ -19,8 +17,6 @@ declare module "@stackflow/config" {
 export default function HelloActivity() {
   const { push } = useFlow();
   const loaderData = useLoaderData();
-
-  console.log("Hello", loaderData);
 
   return (
     <AppScreen>

@@ -1,24 +1,23 @@
-import type { RegisteredActivityName } from "@stackflow/config";
-import { historySyncPlugin } from "@stackflow/plugin-history-sync";
-import {
-  type StackComponentType,
-  type StackflowReactPlugin,
-  stackflow,
-} from "@stackflow/react/future";
+import type {
+  ActivityDefinition,
+  Config,
+  RegisteredActivityName,
+} from "@stackflow/config";
+import { type StackflowReactPlugin, stackflow } from "@stackflow/react/future";
 import { useContext, useMemo } from "react";
 import { UNSAFE_DataRouterContext, useLocation } from "react-router";
 import type { StackflowRouteConfig } from "./StackflowRouteConfig";
 import { routesToComponents } from "./routesToComponents";
 import { routesToConfig } from "./routesToConfig";
 
-export default function ReactRouterStack({
+export default function Stack({
   routes,
   plugins,
-  fallbackActivity,
 }: {
   routes: StackflowRouteConfig;
-  plugins: () => StackflowReactPlugin[];
-  fallbackActivity: () => RegisteredActivityName;
+  plugins: (args: {
+    config: Config<ActivityDefinition<RegisteredActivityName>>;
+  }) => StackflowReactPlugin[];
 }) {
   // biome-ignore lint/correctness/useExhaustiveDependencies:
   const Stack = useMemo(() => {
@@ -31,13 +30,7 @@ export default function ReactRouterStack({
     const { Stack } = stackflow({
       config,
       components,
-      plugins: [
-        historySyncPlugin({
-          config,
-          fallbackActivity,
-        }),
-        ...plugins(),
-      ],
+      plugins: [...plugins({ config })],
     });
 
     return Stack;

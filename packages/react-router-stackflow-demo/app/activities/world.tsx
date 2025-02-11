@@ -3,7 +3,6 @@ import { useLoaderData } from "@stackflow/react/future";
 import type { Route } from "./+types/world";
 
 export function loader({ params, context }: Route.LoaderArgs) {
-  console.log(context.config);
   return {
     message: "world",
   };
@@ -19,8 +18,6 @@ declare module "@stackflow/config" {
 
 export default function WorldActivity() {
   const loaderData = useLoaderData();
-
-  console.log("World", loaderData);
 
   return <AppScreen>World</AppScreen>;
 }
