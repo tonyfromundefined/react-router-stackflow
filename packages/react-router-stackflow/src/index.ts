@@ -1,4 +1,4 @@
-export { default as Stack } from "./Stack";
+export { default as StackOutlet } from "./StackOutlet";
 export type { StackflowRouteConfig } from "./StackflowRouteConfig";
 export type { StackflowRouteConfigEntry } from "./StackflowRouteConfigEntry";
 export { activity } from "./activity";

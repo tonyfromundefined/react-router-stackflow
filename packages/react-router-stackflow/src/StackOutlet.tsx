@@ -10,7 +10,7 @@ import type { StackflowRouteConfig } from "./StackflowRouteConfig";
 import { routesToComponents } from "./routesToComponents";
 import { routesToConfig } from "./routesToConfig";
 
-export default function Stack({
+export default function StackOutlet({
   routes,
   plugins,
 }: {

@@ -4,7 +4,7 @@ import { basicUIPlugin } from "@stackflow/plugin-basic-ui";
 import { historySyncPlugin } from "@stackflow/plugin-history-sync";
 import { basicRendererPlugin } from "@stackflow/plugin-renderer-basic";
 import { Links, Meta, Scripts } from "react-router";
-import { Stack, assignStackflowContext } from "react-router-stackflow";
+import { StackOutlet, assignStackflowContext } from "react-router-stackflow";
 import type { Route } from "./+types/root";
 import routes from "./routes";
 
@@ -31,7 +31,7 @@ export function loader(args: Route.LoaderArgs) {
 
 export default function App() {
   return (
-    <Stack
+    <StackOutlet
       routes={routes}
       plugins={({ config }) => [
         basicRendererPlugin(),
