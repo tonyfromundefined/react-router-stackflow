@@ -29,7 +29,7 @@ export default [
 ];
 ```
 
-2. Remove the use of `<Outlet />` in the implementation within the `<App />` component in `root.tsx` and use `<Stack />`.
+2. Remove the use of `<Outlet />` in the implementation within the `<App />` component in `root.tsx` and use `<StackOutlet />`.
 
 ```tsx
 // root.tsx
@@ -43,12 +43,12 @@ export default function App() {
 import { basicUIPlugin } from "@stackflow/plugin-basic-ui";
 import { historySyncPlugin } from "@stackflow/plugin-history-sync";
 import { basicRendererPlugin } from "@stackflow/plugin-renderer-basic";
-import { Stack } from "react-router-stackflow";
+import { StackOutlet } from "react-router-stackflow";
 import routes from "./routes";
 
 export default function App() {
   return (
-    <Stack
+    <StackOutlet
       routes={routes}
       plugins={({ config }) => ([
         basicRendererPlugin(),
